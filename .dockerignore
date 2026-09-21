@@ -1,0 +1,7 @@
+.git
+.tools
+**/.venv
+**/__pycache__
+**/.env
+**/*.db
+app_flutter

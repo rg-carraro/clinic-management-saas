@@ -1,0 +1,52 @@
+name: CI
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: clinic
+          POSTGRES_PASSWORD: ci-only-ephemeral
+          POSTGRES_DB: clinic_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U clinic -d clinic_test"
+          --health-interval 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql+psycopg://clinic:ci-only-ephemeral@localhost:5432/clinic_test
+      APP_ENV: test
+    defaults:
+      run:
+        working-directory: api_backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.13'
+      - run: uv sync --frozen --group dev
+      - run: uv run ruff check . && uv run ruff format --check .
+      - run: uv run alembic upgrade head && uv run alembic check
+      - run: uv run pytest
+      - run: uv build
+      - run: uv run pip-audit
+  flutter:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app_flutter
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.5'
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: dart format --output=none --set-exit-if-changed lib test
+      - run: flutter analyze
+      - run: flutter test
+      - run: flutter build web
