@@ -1,5 +1,6 @@
 from alembic import context
 
+from clinic.domain import models  # noqa: F401
 from clinic.infrastructure.database import Base, make_engine
 from clinic.shared.config import get_settings
 

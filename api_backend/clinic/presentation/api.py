@@ -1,6 +1,9 @@
 from fastapi import FastAPI
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
+from clinic.presentation.auth_routes import router as auth_router
 from clinic.shared.config import get_settings
 
 
@@ -26,6 +29,17 @@ def create_app() -> FastAPI:
     def health():
         return {"status": "ok"}
 
+    @app.exception_handler(RequestValidationError)
+    async def validation_error(request, error):
+        return JSONResponse(
+            status_code=422,
+            content={
+                "detail": "Dados inválidos. Confira os campos.",
+                "fields": [".".join(str(part) for part in item["loc"]) for item in error.errors()],
+            },
+        )
+
+    app.include_router(auth_router)
     return app
 
 

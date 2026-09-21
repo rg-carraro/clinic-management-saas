@@ -51,3 +51,21 @@ Antes de release, restaure em banco isolado e execute testes/smoke sem dados rea
 Rollback: imagem anterior somente se compatível com o schema; caso contrário,
 restauração do backup validado. Nunca aplicar downgrade destrutivo em produção.
 Não habilite logs de corpo, Authorization, senha ou dados de pacientes.
+
+## Identidade e planos
+
+Cadastre a clínica pelo app; o servidor inicia um trial ESSENTIAL de 7 dias.
+Recuperação de senha depende de SMTP com STARTTLS configurado. Em desenvolvimento,
+configure um servidor SMTP de teste; nunca devolvemos ou registramos o token.
+A sessão expira em 12 horas e logout/troca de senha revogam acesso no servidor.
+
+FOUNDER e concessões comerciais são operadas fora da API pública, com acesso
+restrito ao banco e trilha de auditoria:
+
+```powershell
+uv run python -m clinic.operator ORGANIZATION_ID --license FOUNDER --tier ESSENTIAL
+```
+
+Pro permite equipe; para adicionar alguém, a pessoa precisa ter uma conta e o
+OWNER/ADMIN usa `/v1/members`. Trial não é renovado por reinstalação/login.
+Não há gateway de pagamento de assinatura nesta etapa.
