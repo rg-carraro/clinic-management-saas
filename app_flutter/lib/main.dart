@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'application/session_controller.dart';
 import 'infrastructure/api_client.dart';
@@ -33,10 +34,18 @@ class _ClinicAppState extends State<ClinicApp> {
   @override
   Widget build(BuildContext context) => MaterialApp(
     title: 'Gestão da clínica',
+    locale: const Locale('pt', 'BR'),
+    supportedLocales: const [Locale('pt', 'BR')],
+    localizationsDelegates: GlobalMaterialLocalizations.delegates,
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       colorSchemeSeed: const Color(0xFF126B62),
       useMaterial3: true,
+      cardTheme: CardThemeData(
+        color: Colors.white,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16), side: const BorderSide(color: Color(0xFFE0E8E7))),
+      ),
       scaffoldBackgroundColor: const Color(0xFFF7F9FA),
     ),
     home: ListenableBuilder(

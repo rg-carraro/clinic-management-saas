@@ -37,9 +37,10 @@ class ApiClient {
     });
     if (body != null) request.body = jsonEncode(body);
     try {
-      final response = await http.Response.fromStream(
-        await client.send(request),
-      ).timeout(const Duration(seconds: 20));
+      final response = await client
+          .send(request)
+          .then(http.Response.fromStream)
+          .timeout(const Duration(seconds: 20));
       final data = response.body.isEmpty
           ? null
           : jsonDecode(utf8.decode(response.bodyBytes));

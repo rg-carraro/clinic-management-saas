@@ -213,6 +213,7 @@ def members(
     return [
         {
             "id": member.id,
+            "user_id": user.id,
             "name": user.name,
             "email": user.email,
             "role": member.role,

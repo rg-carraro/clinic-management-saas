@@ -1,9 +1,13 @@
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from sqlalchemy import text
+from sqlalchemy.exc import SQLAlchemyError
 
+from clinic.infrastructure.database import get_db
 from clinic.presentation.auth_routes import router as auth_router
+from clinic.presentation.operations_routes import router as operations_router
 from clinic.shared.config import get_settings
 
 
@@ -29,6 +33,14 @@ def create_app() -> FastAPI:
     def health():
         return {"status": "ok"}
 
+    @app.get("/ready", tags=["system"])
+    def ready(db=Depends(get_db)):
+        try:
+            db.execute(text("SELECT 1"))
+        except SQLAlchemyError:
+            return JSONResponse(status_code=503, content={"status": "unavailable"})
+        return {"status": "ready"}
+
     @app.exception_handler(RequestValidationError)
     async def validation_error(request, error):
         return JSONResponse(
@@ -40,6 +52,7 @@ def create_app() -> FastAPI:
         )
 
     app.include_router(auth_router)
+    app.include_router(operations_router)
     return app
 
 

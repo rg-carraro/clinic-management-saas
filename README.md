@@ -69,3 +69,17 @@ uv run python -m clinic.operator ORGANIZATION_ID --license FOUNDER --tier ESSENT
 Pro permite equipe; para adicionar alguém, a pessoa precisa ter uma conta e o
 OWNER/ADMIN usa `/v1/members`. Trial não é renovado por reinstalação/login.
 Não há gateway de pagamento de assinatura nesta etapa.
+
+## MVP disponível
+
+Pacientes (edição/arquivamento), serviços, profissionais, agenda com conflito de
+horários, atendimento com valor histórico, pagamentos parciais/totais, saldo,
+dashboard, relatório por período e WhatsApp manual com mensagem editável.
+
+Comece por **Configurações → Profissional e Serviço**, depois **Pacientes → Agenda
+→ Concluir atendimento → Financeiro**. O trial inicia no cadastro.
+[Fluxos de aceite e API](docs/api-e-fluxos.md) · [Operação](docs/operacao.md).
+
+No checkout preparado nesta máquina, os executáveis locais estão em
+`.tools/uv/bin/uv.exe` e `.tools/flutter/bin/flutter.bat`. Esses SDKs e os artefatos
+de build são ignorados pelo Git; em outra máquina, instale os requisitos acima.

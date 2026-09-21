@@ -12,6 +12,7 @@ def make_engine(url: str):
     engine = create_engine(
         url,
         pool_pre_ping=True,
+        hide_parameters=True,
         connect_args={"check_same_thread": False} if url.startswith("sqlite") else {},
     )
     if url.startswith("sqlite"):
