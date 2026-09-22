@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 
@@ -27,7 +26,16 @@ void main() {
           ),
         );
       await font.load();
-      final icons = FontLoader('MaterialIcons')..addFont(Future.value(ByteData.sublistView(File('../.tools/flutter/bin/cache/artifacts/material_fonts/materialicons-regular.otf').readAsBytesSync())));
+      final icons = FontLoader('MaterialIcons')
+        ..addFont(
+          Future.value(
+            ByteData.sublistView(
+              File(
+                '../.tools/flutter/bin/cache/artifacts/material_fonts/materialicons-regular.otf',
+              ).readAsBytesSync(),
+            ),
+          ),
+        );
       await icons.load();
     }
   });

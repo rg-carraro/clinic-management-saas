@@ -506,7 +506,10 @@ class _HomeScreenState extends State<HomeScreen> {
     padding: const EdgeInsets.all(32),
     child: Center(child: Text(text, textAlign: TextAlign.center)),
   );
-  Widget tileCard(Widget child) => SizedBox(width: double.infinity, child: Card(margin: const EdgeInsets.only(bottom: 12), child: child));
+  Widget tileCard(Widget child) => SizedBox(
+    width: double.infinity,
+    child: Card(margin: const EdgeInsets.only(bottom: 12), child: child),
+  );
   Widget metric(String title, String value, IconData icon) => SizedBox(
     width: 240,
     child: Card(
@@ -1115,8 +1118,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context);
               },
               children: [
-                const Padding(padding: EdgeInsets.fromLTRB(28, 28, 20, 20), child: Text('Gestão da clínica')),
-                for (final i in available) NavigationDrawerDestination(icon: Icon(icons[i]), label: Text(labels[i])),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(28, 28, 20, 20),
+                  child: Text('Gestão da clínica'),
+                ),
+                for (final i in available)
+                  NavigationDrawerDestination(
+                    icon: Icon(icons[i]),
+                    label: Text(labels[i]),
+                  ),
               ],
             )
           : null,

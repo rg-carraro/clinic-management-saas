@@ -79,6 +79,7 @@ dashboard, relatório por período e WhatsApp manual com mensagem editável.
 Comece por **Configurações → Profissional e Serviço**, depois **Pacientes → Agenda
 → Concluir atendimento → Financeiro**. O trial inicia no cadastro.
 [Fluxos de aceite e API](docs/api-e-fluxos.md) · [Operação](docs/operacao.md).
+[Registro de entregas](docs/entregas.md) · [Catálogo de funcionalidades](docs/catalogo-funcionalidades.md).
 
 No checkout preparado nesta máquina, os executáveis locais estão em
 `.tools/uv/bin/uv.exe` e `.tools/flutter/bin/flutter.bat`. Esses SDKs e os artefatos

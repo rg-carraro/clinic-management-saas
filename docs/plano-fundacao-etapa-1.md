@@ -1,4 +1,7 @@
-Vou transformar a visão do projeto em um plano executável para o Codex seguir, com foco na Fundação e na próxima etapa de implementação.
+> Estado em 21/09/2026: Fundação, Identidade/tenancy e código do MVP Essencial
+> implementados. O fechamento e as evidências de validação estão em
+> [Registro de entregas](entregas.md). Este documento preserva o plano original;
+> o escopo executado e os limites estão em [Implementação](implementacao.md).
 
 # Plano para o Codex — Fundação e Etapa 1
 Objetivo
@@ -193,8 +196,5 @@ documentação e arquitetura iniciais disponíveis
 ## 8) Recomendação final
 A melhor próxima etapa é começar pela Fundação e depois pela Etapa 1, sem tentar montar o MVP completo de uma vez. Isso reduz risco, mantém a segurança e permite validar o sistema antes de entrar em agenda, atendimentos e financeiro.
 
-Se quiser, eu posso agora te entregar um segundo passo mais técnico:
-
-“estrutura exata do monorepo”
-“modelo de domínio em Dart/TypeScript”
-“prompt completo para o Codex com as primeiras tasks”
+Próxima etapa do roadmap: Cloud/offline/sync, em entrega separada, após o aceite
+do MVP. O MVP atual exige conexão e não inclui módulo clínico.

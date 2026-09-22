@@ -44,7 +44,10 @@ class _ClinicAppState extends State<ClinicApp> {
       cardTheme: CardThemeData(
         color: Colors.white,
         elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16), side: const BorderSide(color: Color(0xFFE0E8E7))),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: const BorderSide(color: Color(0xFFE0E8E7)),
+        ),
       ),
       scaffoldBackgroundColor: const Color(0xFFF7F9FA),
     ),
