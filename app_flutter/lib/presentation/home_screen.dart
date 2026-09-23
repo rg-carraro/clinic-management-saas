@@ -8,6 +8,8 @@ import '../application/clinic_repository.dart';
 import '../application/session_controller.dart';
 import '../domain/money.dart';
 import 'editor.dart';
+import 'design/app_theme.dart';
+import 'design/components.dart';
 
 class HomeScreen extends StatefulWidget {
   final SessionController session;
@@ -483,42 +485,29 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Widget heading(String title, {String? subtitle, Widget? action}) => Padding(
-    padding: const EdgeInsets.only(bottom: 24),
-    child: Wrap(
-      alignment: WrapAlignment.spaceBetween,
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 24,
-      runSpacing: 12,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(title, style: Theme.of(context).textTheme.headlineSmall),
-            if (subtitle != null) Text(subtitle),
-          ],
-        ),
-        ?action,
-      ],
-    ),
-  );
-  Widget empty(String text) => Padding(
-    padding: const EdgeInsets.all(32),
-    child: Center(child: Text(text, textAlign: TextAlign.center)),
-  );
+  Widget heading(String title, {String? subtitle, Widget? action}) =>
+      SectionHeading(title, subtitle: subtitle, action: action);
+  Widget empty(String text) => EmptyPanel(text, icon: icons[selected]);
   Widget tileCard(Widget child) => SizedBox(
     width: double.infinity,
     child: Card(margin: const EdgeInsets.only(bottom: 12), child: child),
   );
   Widget metric(String title, String value, IconData icon) => SizedBox(
-    width: 240,
+    width: MediaQuery.sizeOf(context).width >= 900
+        ? min(248, (MediaQuery.sizeOf(context).width - 356) / 4)
+        : MediaQuery.sizeOf(context).width >= 600
+        ? (MediaQuery.sizeOf(context).width - 44) / 2
+        : MediaQuery.sizeOf(context).width - 32,
     child: Card(
       child: Padding(
         padding: const EdgeInsets.all(22),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: Theme.of(context).colorScheme.primary),
+            CircleAvatar(
+              backgroundColor: AppBrand.pale,
+              child: Icon(icon, color: AppBrand.blue),
+            ),
             const SizedBox(height: 18),
             Text(value, style: Theme.of(context).textTheme.headlineSmall),
             Text(title),
@@ -531,9 +520,36 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget overview() => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      heading(
-        'Sua clínica, em dia',
-        subtitle: 'Resumo administrativo e financeiro',
+      Container(
+        width: double.infinity,
+        margin: const EdgeInsets.only(bottom: 24),
+        padding: const EdgeInsets.all(28),
+        decoration: BoxDecoration(
+          gradient: AppBrand.gradient,
+          borderRadius: BorderRadius.circular(AppBrand.radius),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(Icons.wb_sunny_outlined, color: Colors.white, size: 28),
+            const SizedBox(height: 20),
+            Text(
+              'Sua clínica, em dia',
+              style: Theme.of(context).textTheme.headlineSmall
+                  ?.copyWith(color: Colors.white),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Um olhar para sua rotina. Mais espaço para cuidar.',
+              style: TextStyle(color: Colors.white),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Resumo administrativo e financeiro',
+              style: TextStyle(color: Colors.white),
+            ),
+          ],
+        ),
       ),
       Wrap(
         spacing: 12,
@@ -589,7 +605,6 @@ class _HomeScreenState extends State<HomeScreen> {
         decoration: const InputDecoration(
           labelText: 'Buscar pelo nome',
           prefixIcon: Icon(Icons.search),
-          border: OutlineInputBorder(),
         ),
         onChanged: (v) => setState(() => search = v),
       ),
@@ -701,7 +716,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text(
                   '${a['service_name']} • ${a['professional_name']} • ${money(a['price_cents'])}',
                 ),
-                Text(
+                StatusBadge(
                   const {
                     'SCHEDULED': 'Agendado',
                     'COMPLETED': 'Concluído',
@@ -1048,7 +1063,20 @@ class _HomeScreenState extends State<HomeScreen> {
           );
     return Scaffold(
       appBar: AppBar(
-        title: Text(session.profile!['organization']['name']),
+        title: Row(
+          children: [
+            const BrandMark(size: 34),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                session.profile!['organization']['name'],
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
+          ],
+        ),
         actions: [
           if (session.organizations.length > 1)
             PopupMenuButton<String>(
@@ -1093,6 +1121,22 @@ class _HomeScreenState extends State<HomeScreen> {
           if (wide && available.length > 1)
             NavigationRail(
               extended: true,
+              leading: const Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    BrandMark(),
+                    SizedBox(height: 12),
+                    Text(
+                      AppBrand.name,
+                      style: TextStyle(
+                        color: AppBrand.navy,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               selectedIndex: available.indexOf(selected),
               onDestinationSelected: loading
                   ? null
@@ -1120,7 +1164,23 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 const Padding(
                   padding: EdgeInsets.fromLTRB(28, 28, 20, 20),
-                  child: Text('Gestão da clínica'),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BrandMark(),
+                      SizedBox(height: 16),
+                      Text(
+                        AppBrand.name,
+                        style: TextStyle(
+                          color: AppBrand.navy,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text('Sua rotina, bem cuidada.'),
+                    ],
+                  ),
                 ),
                 for (final i in available)
                   NavigationDrawerDestination(

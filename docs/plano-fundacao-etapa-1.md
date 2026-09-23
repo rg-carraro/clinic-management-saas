@@ -1,5 +1,7 @@
-> Estado em 21/09/2026: Fundação, Identidade/tenancy e código do MVP Essencial
-> implementados. O fechamento e as evidências de validação estão em
+> Estado em 22/09/2026: Fundação, Identidade/tenancy e MVP Essencial implementados.
+> Identidade provisória azul/branco aplicada; APK debug Android compilado.
+> Próximo passo: apresentação e coleta de feedback. [Guia Android Studio](../app_flutter/README.md)
+> e [roteiro de apresentação](apresentacao-mvp.md). O fechamento e as evidências de validação estão em
 > [Registro de entregas](entregas.md). Este documento preserva o plano original;
 > o escopo executado e os limites estão em [Implementação](implementacao.md).
 

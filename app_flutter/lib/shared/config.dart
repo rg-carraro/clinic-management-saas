@@ -1,7 +1,11 @@
-const apiBaseUrl = String.fromEnvironment(
-  'API_BASE_URL',
-  defaultValue: 'http://localhost:8000',
-);
+import 'package:flutter/foundation.dart';
+
+const _configuredApiBaseUrl = String.fromEnvironment('API_BASE_URL');
+final apiBaseUrl = _configuredApiBaseUrl.isNotEmpty
+    ? _configuredApiBaseUrl
+    : !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+    ? 'http://10.0.2.2:8000'
+    : 'http://localhost:8000';
 const appEnvironment = String.fromEnvironment('APP_ENV', defaultValue: 'dev');
 
 void validateConfiguration() {

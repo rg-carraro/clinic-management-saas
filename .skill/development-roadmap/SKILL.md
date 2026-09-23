@@ -1,3 +1,8 @@
+---
+name: development-roadmap
+description: Planejar a continuidade do produto e delimitar as etapas administrativas, financeiras, offline e clínicas.
+---
+
 # Skill: Development Roadmap
 
 ## Etapa 0 — Fundação
@@ -61,3 +66,12 @@
 
 ## Etapa 7 — Clínico especializado
 Somente após requisitos específicos de profissão, privacidade, segurança, auditoria, retenção e conformidade.
+
+## Retomada após o MVP
+
+Consulte `docs/entregas.md` para o estado executado; esta lista é o roadmap,
+não evidência de que todos os recursos estão concluídos. Fundação, identidade e
+MVP têm implementação; a identidade azul/branco é provisória e reutilizável.
+Antes de planejar a próxima fase, incorporar o feedback da apresentação descrita
+em `docs/apresentacao-mvp.md`. Offline/sync continua uma entrega separada.
+Não reiniciar a fundação nem avançar automaticamente ao módulo clínico.

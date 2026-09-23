@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:clinic_app/application/session_controller.dart';
@@ -9,6 +10,10 @@ import 'package:clinic_app/main.dart';
 
 void main() {
   testWidgets('Valida formulário antes de enviar', (tester) async {
+    tester.view.physicalSize = const Size(360, 800);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
     await tester.pumpWidget(const ClinicApp());
     await tester.tap(find.text('Entrar'));
     await tester.pump();
@@ -16,6 +21,7 @@ void main() {
     await tester.tap(find.text('Criar uma conta'));
     await tester.pump();
     expect(find.text('Nome da clínica'), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   test('Sessão utiliza tenant e limpa token quando revogada', () async {

@@ -27,3 +27,12 @@ Cloud é fonte canônica; banco local suporta cache/offline/sync.
 
 ## Segurança
 Security by design, least privilege, zero trust entre cliente e API, isolamento de tenants, RBAC, auditoria, proteção de segredos, criptografia em trânsito e controles apropriados em repouso, backups e recuperação.
+
+
+## Estado do MVP
+
+Fundação, identidade e núcleo administrativo/financeiro implementados. O MVP
+atual requer conexão; cache/offline/sync acima descreve a arquitetura futura.
+Identidade provisória azul/branco, nome ainda em definição. Android Studio e
+APK debug preparados. Consulte [entregas](docs/entregas.md),
+[guia Flutter](app_flutter/README.md) e [roteiro de feedback](docs/apresentacao-mvp.md).

@@ -19,8 +19,9 @@ class ApiClient {
   String? token;
   String? tenantId;
   void Function()? onUnauthorized;
-  ApiClient({http.Client? client, this.baseUrl = apiBaseUrl})
-    : client = client ?? http.Client();
+  ApiClient({http.Client? client, String? baseUrl})
+    : baseUrl = baseUrl ?? apiBaseUrl,
+      client = client ?? http.Client();
 
   Future<dynamic> request(
     String method,

@@ -6,6 +6,7 @@ import 'infrastructure/api_client.dart';
 import 'presentation/auth_screen.dart';
 import 'presentation/home_screen.dart';
 import 'shared/config.dart';
+import 'presentation/design/app_theme.dart';
 
 void main() {
   validateConfiguration();
@@ -38,19 +39,7 @@ class _ClinicAppState extends State<ClinicApp> {
     supportedLocales: const [Locale('pt', 'BR')],
     localizationsDelegates: GlobalMaterialLocalizations.delegates,
     debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      colorSchemeSeed: const Color(0xFF126B62),
-      useMaterial3: true,
-      cardTheme: CardThemeData(
-        color: Colors.white,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(color: Color(0xFFE0E8E7)),
-        ),
-      ),
-      scaffoldBackgroundColor: const Color(0xFFF7F9FA),
-    ),
+    theme: AppBrand.theme,
     home: ListenableBuilder(
       listenable: session,
       builder: (context, _) => session.authenticated

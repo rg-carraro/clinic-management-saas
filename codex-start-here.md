@@ -1,3 +1,11 @@
+> Retomada em 22/09/2026: o texto abaixo preserva o pedido inicial. Não recriar
+> a fundação. Consulte `docs/entregas.md` e `docs/implementacao.md` para o estado
+> atual; a próxima ação de produto é homologar/apresentar o MVP e coletar feedback.
+> Para UI, use `.skill/flutter-visual-identity/SKILL.md`; para validação,
+> `.skill/testing-security-release/SKILL.md`. Abra `app_flutter` no Android Studio
+> conforme `app_flutter/README.md`. As skills locais ficam em `.skill/` e devem
+> ser lidas explicitamente; não dependem de instalação global no Codex.
+
 # Prompt inicial Codex — V5
 
 Crie um novo SaaS Flutter/Dart para Android e iOS, preparado para Web, voltado a profissionais de saúde, consultórios e clínicas. O nome comercial está em definição.

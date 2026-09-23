@@ -63,3 +63,11 @@ Publicar commits não significa implantar um serviço. Produção depende de ban
 domínio/TLS, SMTP, armazenamento/backups com criptografia e credenciais do operador.
 iOS exige build em macOS e assinatura Apple; Android distribuível exige assinatura.
 Documentar os builds realmente executados e qualquer validação indisponível.
+
+## Apresentação e identidade provisória
+
+O MVP recebeu tema azul/branco reutilizável em todas as áreas e recursos Android.
+A decisão e o mapa de arquivos estão na [ADR 0002](adr/0002-identidade-visual-e-android.md).
+O [guia Flutter](../app_flutter/README.md) orienta importação no Android Studio,
+execução da API e build. O [roteiro de apresentação](apresentacao-mvp.md) organiza
+feedback para as próximas fases; não amplia o escopo clínico ou offline.

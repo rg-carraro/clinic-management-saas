@@ -201,5 +201,40 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Novo paciente'), findsOneWidget);
     expect(tester.takeException(), isNull);
+    await tester.tap(find.text('Novo paciente'));
+    await tester.pumpAndSettle();
+    expect(
+      find.text('Cadastro administrativo. Não inclua informações clínicas.'),
+      findsOneWidget,
+    );
+    expect(tester.takeException(), isNull);
+    if (const bool.fromEnvironment('CAPTURE_UI')) {
+      await expectLater(
+        find.byType(ClinicApp),
+        matchesGoldenFile('../../.tools/mvp-editor-mobile.png'),
+      );
+    }
+    await tester.tap(find.text('Cancelar'));
+    await tester.pumpAndSettle();
+    for (final page in [
+      'Agenda',
+      'Relatórios',
+      'Configurações',
+      'Visão geral',
+    ]) {
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(page).last);
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull, reason: 'Layout mobile: $page');
+      if (const bool.fromEnvironment('CAPTURE_UI')) {
+        await expectLater(
+          find.byType(ClinicApp),
+          matchesGoldenFile(
+            '../../.tools/mvp-mobile-${page.replaceAll(' ', '-')}.png',
+          ),
+        );
+      }
+    }
   });
 }

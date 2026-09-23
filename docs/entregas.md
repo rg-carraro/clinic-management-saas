@@ -93,3 +93,43 @@ Os testes Python emitem avisos de depreciação de Starlette/httpx e AnyIO, sem 
 
 Próximo trabalho: homologar o fluxo manual documentado e planejar Cloud/offline/sync
 em entrega separada, preservando a idempotência financeira existente.
+
+## 22/09/2026 — Identidade provisória e preparação Android Studio
+
+- Tema azul e branco centralizado em `presentation/design/app_theme.dart`, com
+  componentes reutilizáveis em `components.dart`: marca, títulos responsivos,
+  estados vazios e indicadores de status.
+- Atualizados acesso/recuperação, painel, pacientes, agenda, financeiro,
+  relatórios, configurações, navegação lateral e móvel, formulários e menus.
+- Marca provisória em folhas, ícone Android e abertura personalizada, incluindo
+  recursos Android 12+. Sem novas dependências ou fontes externas.
+- Configuração compartilhada `.run/MVP Android Emulator.run.xml` e endereço
+  padrão Android `10.0.2.2:8000`; `API_BASE_URL` continua configurável.
+- Guia de importação/build em `app_flutter/README.md` e roteiro de feedback em
+  `docs/apresentacao-mvp.md`.
+
+Validação: `flutter analyze` sem problemas; quatro testes Flutter aprovados,
+com regressão de pagamento parcial, sessão revogada, validação de formulário,
+navegação pelos seis menus em 360×800 e abertura de cadastro. Capturas locais
+conferidas para painel, financeiro, configurações, relatórios e diálogo.
+`flutter build apk --debug` concluído: `app_flutter/build/app/outputs/flutter-apk/app-debug.apk`.
+
+Sem migrations ou alterações na API. Revisão do diff preservou headers de tenant,
+autorização, entitlements e fluxo financeiro; nenhum segredo ou log adicionado.
+A suíte do backend não foi reexecutada nesta mudança de apresentação.
+A validação foi por compilação, análise e widgets; o fluxo com API real na IDE
+continua como homologação manual antes da apresentação. API online obrigatória.
+APK debug para demonstração; assinatura de loja permanece pendente.
+
+
+### Consolidação documental e skills
+
+Atualizados plano de retomada, visão do produto, implementação, operação e
+catálogo. O app atual tem gestão de equipe em Configurações para perfis/planos
+habilitados e cópia de resumo CSV; as observações anteriores que indicam apenas
+API são históricas e ficam substituídas por este estado.
+ADR 0002 registra tema reutilizável, recursos Android e configuração da API.
+Skills de engenharia, validação, roadmap e catálogo atualizadas; adicionada
+`flutter-visual-identity`, sem instalar skills globais ou alterar regras clínicas.
+A publicação Git inclui código, recursos, configuração Run, testes e documentação;
+SDKs, caches, APK, credenciais e caminhos locais permanecem ignorados.

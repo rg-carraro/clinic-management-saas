@@ -40,6 +40,7 @@ Future<bool> editDialog(
       builder: (context, setState) => PopScope(
         canPop: !busy,
         child: AlertDialog(
+          icon: const Icon(Icons.edit_note_rounded),
           title: Text(title),
           content: SizedBox(
             width: 480,
@@ -65,7 +66,6 @@ Future<bool> editDialog(
                                 isExpanded: true,
                                 decoration: InputDecoration(
                                   labelText: field.label,
-                                  border: const OutlineInputBorder(),
                                 ),
                                 items: field.choices!.entries
                                     .map(
@@ -100,7 +100,6 @@ Future<bool> editDialog(
                                     : TextInputType.text,
                                 decoration: InputDecoration(
                                   labelText: field.label,
-                                  border: const OutlineInputBorder(),
                                 ),
                                 validator: (value) {
                                   final text = value?.trim() ?? '';

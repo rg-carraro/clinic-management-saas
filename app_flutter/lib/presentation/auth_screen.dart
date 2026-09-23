@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../application/session_controller.dart';
+import 'design/app_theme.dart';
+import 'design/components.dart';
 
 class AuthScreen extends StatefulWidget {
   final SessionController session;
@@ -98,10 +100,7 @@ class _AuthScreenState extends State<AuthScreen> {
       enabled: !busy,
       keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
       autocorrect: !secret && !isEmail,
-      decoration: InputDecoration(
-        labelText: label,
-        border: const OutlineInputBorder(),
-      ),
+      decoration: InputDecoration(labelText: label),
       validator: (value) {
         if (value == null || value.trim().isEmpty) return 'Preencha este campo';
         if (secret && value.length < 12) return 'Use pelo menos 12 caracteres';
@@ -120,94 +119,115 @@ class _AuthScreenState extends State<AuthScreen> {
       _ => 'Bem-vindo de volta',
     };
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 440),
-            child: Form(
-              key: form,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Icon(
-                    Icons.local_hospital_outlined,
-                    size: 48,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Gestão da clínica',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleMedium,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 32),
-                  if (mode == 'register') ...[
-                    field('Seu nome', name),
-                    field('Nome da clínica', organization),
-                  ],
-                  if (mode != 'reset') field('E-mail', email, isEmail: true),
-                  if (mode == 'reset')
-                    field('Código recebido por e-mail', code),
-                  if (mode != 'forgot') field('Senha', password, secret: true),
-                  if (message != null)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: Text(message!, semanticsLabel: message),
-                    ),
-                  FilledButton(
-                    onPressed: busy ? null : submit,
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Text(
-                        busy
-                            ? 'Aguarde…'
-                            : switch (mode) {
-                                'register' => 'Criar conta • 7 dias grátis',
-                                'forgot' => 'Enviar código',
-                                'reset' => 'Atualizar senha',
-                                _ => 'Entrar',
-                              },
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [AppBrand.pale, AppBrand.canvas],
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 440),
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Form(
+                      key: form,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const Center(child: BrandMark(size: 64)),
+                          const SizedBox(height: 16),
+                          Text(
+                            AppBrand.name,
+                            style: Theme.of(context).textTheme.headlineSmall,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            title,
+                            style: Theme.of(context).textTheme.titleMedium,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 12),
+                          const Text(
+                            'Mais cuidado com sua rotina.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: AppBrand.blue),
+                          ),
+                          const SizedBox(height: 32),
+                          if (mode == 'register') ...[
+                            field('Seu nome', name),
+                            field('Nome da clínica', organization),
+                          ],
+                          if (mode != 'reset')
+                            field('E-mail', email, isEmail: true),
+                          if (mode == 'reset')
+                            field('Código recebido por e-mail', code),
+                          if (mode != 'forgot')
+                            field('Senha', password, secret: true),
+                          if (message != null)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 16),
+                              child: Text(message!, semanticsLabel: message),
+                            ),
+                          FilledButton(
+                            onPressed: busy ? null : submit,
+                            child: Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: Text(
+                                busy
+                                    ? 'Aguarde…'
+                                    : switch (mode) {
+                                        'register' =>
+                                          'Criar conta • 7 dias grátis',
+                                        'forgot' => 'Enviar código',
+                                        'reset' => 'Atualizar senha',
+                                        _ => 'Entrar',
+                                      },
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          if (mode == 'login') ...[
+                            TextButton(
+                              onPressed: busy
+                                  ? null
+                                  : () => setState(() {
+                                      mode = 'register';
+                                      message = null;
+                                    }),
+                              child: const Text('Criar uma conta'),
+                            ),
+                            TextButton(
+                              onPressed: busy
+                                  ? null
+                                  : () => setState(() {
+                                      mode = 'forgot';
+                                      message = null;
+                                    }),
+                              child: const Text('Esqueci minha senha'),
+                            ),
+                          ] else
+                            TextButton(
+                              onPressed: busy
+                                  ? null
+                                  : () => setState(() {
+                                      mode = 'login';
+                                      message = null;
+                                    }),
+                              child: const Text('Voltar para entrar'),
+                            ),
+                        ],
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  if (mode == 'login') ...[
-                    TextButton(
-                      onPressed: busy
-                          ? null
-                          : () => setState(() {
-                              mode = 'register';
-                              message = null;
-                            }),
-                      child: const Text('Criar uma conta'),
-                    ),
-                    TextButton(
-                      onPressed: busy
-                          ? null
-                          : () => setState(() {
-                              mode = 'forgot';
-                              message = null;
-                            }),
-                      child: const Text('Esqueci minha senha'),
-                    ),
-                  ] else
-                    TextButton(
-                      onPressed: busy
-                          ? null
-                          : () => setState(() {
-                              mode = 'login';
-                              message = null;
-                            }),
-                      child: const Text('Voltar para entrar'),
-                    ),
-                ],
+                ),
               ),
             ),
           ),

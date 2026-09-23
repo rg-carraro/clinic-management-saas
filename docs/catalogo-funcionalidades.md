@@ -1,8 +1,9 @@
 # Catálogo de funcionalidades
 
-Estado em 21/09/2026. `beta` indica implementação disponível para homologação;
-não significa implantação em produção. Web é validada localmente; Android/iOS
-compartilham o aplicativo, mas distribuição e assinatura continuam pendentes.
+Estado em 22/09/2026. `beta` indica implementação disponível para homologação;
+não significa implantação em produção. Web tem validação local anterior; Android tem APK debug compilado e testes
+de widgets. Execução com API real na IDE ainda requer homologação. iOS não foi
+compilado. Assinatura e distribuição em lojas continuam pendentes.
 
 | Nome comercial | Descrição | Tier | Status | Plataformas | Entitlement |
 | --- | --- | --- | --- | --- | --- |
@@ -12,8 +13,8 @@ compartilham o aplicativo, mas distribuição e assinatura continuam pendentes.
 | Financeiro | Pagamentos parciais/totais e saldo consolidado | ESSENTIAL/PRO | beta | Web, Android, iOS | finance |
 | WhatsApp manual | Lembrete e cobrança editáveis, sem envio automático | ESSENTIAL/PRO | beta | Web, Android, iOS | whatsapp |
 | Dashboard | Indicadores administrativos e financeiros | ESSENTIAL/PRO | beta | Web, Android, iOS | dashboard |
-| Relatórios básicos | Resumo por período e CSV na API | ESSENTIAL/PRO | beta | Web, Android, iOS; CSV via API | reports |
-| Equipe e múltiplas agendas | Vínculos/papéis via API e cadastro de profissionais | PRO | beta | API; agendas no aplicativo | team |
+| Relatórios básicos | Resumo por período, cópia CSV no app e CSV na API | ESSENTIAL/PRO | beta | Web, Android, iOS; API | reports |
+| Equipe e múltiplas agendas | Adicionar/revogar acessos em Configurações, papéis e profissionais | PRO | beta | Web, Android, iOS; API | team |
 | Offline/sync | Cache, fila persistida e resolução de conflitos | A definir | planned | Web, Android, iOS | A definir |
 | Assinaturas e seats | Contratação, provedores e preços configuráveis | ESSENTIAL/PRO | planned | A definir | A definir |
 | Pro avançado | Automações e relatórios avançados | PRO | planned | A definir | A definir |

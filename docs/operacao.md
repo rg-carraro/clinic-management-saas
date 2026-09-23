@@ -38,3 +38,13 @@ Builds de produção recusam API sem HTTPS em tempo de inicialização do aplica
 
 Preview local sem logs de URLs: `python infra/serve_web.py`, depois abra
 `http://localhost:8080` com a API em `http://localhost:8000`.
+
+
+## Homologação Android do MVP
+
+Importação e comandos: [guia Android Studio](../app_flutter/README.md).
+No emulador, o padrão de desenvolvimento é `http://10.0.2.2:8000`; em aparelho
+físico configure `API_BASE_URL` HTTPS acessível. A API deve estar ligada.
+O APK fica em `app_flutter/build/app/outputs/flutter-apk/app-debug.apk`, ignorado
+pelo Git. Não há release de loja nesta entrega. Faça o fluxo com dados fictícios
+antes da apresentação, conforme [roteiro](apresentacao-mvp.md).

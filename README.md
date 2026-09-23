@@ -4,6 +4,11 @@ MVP administrativo e financeiro para clínicas, com Flutter e FastAPI.
 Visão do produto: [00_README.md](00_README.md).
 Plano e limites: [docs/implementacao.md](docs/implementacao.md).
 
+## Android Studio e apresentação
+
+Abra a pasta `app_flutter` no Android Studio. Veja o [guia de importação e build](app_flutter/README.md)
+e o [roteiro para apresentar e coletar feedback](docs/apresentacao-mvp.md).
+
 ## Desenvolvimento
 
 Requisitos: Python 3.13, uv, Flutter stable, PostgreSQL 17 (ou SQLite local).
